@@ -151,11 +151,12 @@
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
     }
 
+    }
     .product-card img {
       width: 100%;
-      height: auto;
+      height: 300px; /* Sabit yükseklik veriyoruz */
+      object-fit: cover; /* Görseli kırparak kutuya sığdırır */
       border-radius: 6px;
-      object-fit: contain; /* Resim boyutunu değiştirmeden içeriği sığdırır */
     }
 
     .product-card h3 {
