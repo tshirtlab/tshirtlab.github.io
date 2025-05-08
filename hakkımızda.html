@@ -1,1 +1,224 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hakkımızda - Tshirtlab</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: #111;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 42px;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 18px;
+      color: #ccc;
+    }
+
+    .category-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: #111;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 6px;
+      z-index: 1001;
+    }
+
+    .category-btn:hover {
+      background: #222;
+    }
+
+    .side-menu {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      width: 250px;
+      height: 100%;
+      background-color: #111;
+      color: white;
+      transition: left 0.3s ease;
+      padding-top: 60px;
+      z-index: 1000;
+    }
+
+    .side-menu a {
+      display: block;
+      padding: 15px 25px;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    .side-menu a:hover {
+      background-color: #444;
+    }
+
+    .side-menu.open {
+      left: 0;
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-title {
+      font-size: 32px;
+      margin-bottom: 40px;
+      text-align: center;
+      color: #111;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 80px;
+    }
+
+    .row:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    .row img {
+      flex: 1;
+      max-width: 100%;
+      border-radius: 12px;
+      height: 400px;
+      object-fit: cover;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    .text {
+      flex: 1;
+      padding: 30px;
+    }
+
+    .text h3 {
+      font-size: 26px;
+      margin-bottom: 15px;
+      color: #111;
+    }
+
+    .text p {
+      font-size: 16px;
+      color: #555;
+    }
+
+    footer {
+      background-color: #111;
+      color: white;
+      text-align: center;
+      padding: 30px;
+      margin-top: 60px;
+    }
+
+    @media (max-width: 768px) {
+      .row {
+        flex-direction: column;
+      }
+
+      .row:nth-child(even) {
+        flex-direction: column;
+      }
+
+      .text {
+        padding: 20px 0;
+      }
+
+      .row img {
+        height: 250px;
+      }
+
+      header h1 {
+        font-size: 30px;
+      }
+
+      .section-title {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Kategori Butonu -->
+  <button class="category-btn" onclick="document.getElementById('sideMenu').classList.toggle('open')">Kategori</button>
+
+  <!-- Yan Menü -->
+  <div id="sideMenu" class="side-menu">
+    <a href="index.html">Anasayfa</a>
+    <a href="index.html#urunler">Ürünler</a>
+    <a href="hakkimizda.html">Hakkımızda</a>
+    <a href="#">İletişim</a>
+  </div>
+
+  <!-- Başlık -->
+  <header>
+    <h1>Biz Kimiz?</h1>
+    <p>Tshirtlab olarak kaliteli tasarımı, konforla buluşturuyoruz.</p>
+  </header>
+
+  <!-- İçerik -->
+  <section>
+    <h2 class="section-title">Kalite ve Özenle Üretilmiş Ürünler</h2>
+
+    <div class="row">
+      <img src="1çekim.JPG" alt="Üretim Süreci">
+      <div class="text">
+        <h3>Üretim Aşaması</h3>
+        <p>Ürünlerimizin her biri detaylı kalite kontrol süreçlerinden geçer. Modern makineler ve tecrübeli ekiplerle çalışarak tshirtlerimizi en iyi şekilde hazırlarız. Kumaşlarımız nefes alabilir, yumuşak ve uzun ömürlüdür.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="2kargo.JPG" alt="Kargo Süreci">
+      <div class="text">
+        <h3>Hızlı ve Güvenli Kargo</h3>
+        <p>Siparişlerinizi en geç 24 saat içinde kargoluyoruz. Şeffaf takip sistemi sayesinde her adımı görebilir, güvenle alışveriş yapabilirsiniz. Ürünlerimiz özel paketleme ile zarar görmeden adresinize ulaşır.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <img src="1çekim.JPG" alt="Ekip Fotoğrafı">
+      <div class="text">
+        <h3>Tutkulu Bir Ekip</h3>
+        <p>Tshirtlab, modayı takip eden genç bir ekip tarafından yönetiliyor. Biz sadece tshirt değil, stil yaratıyoruz. Her tasarımımızda sizlerin hayatına dokunmayı hedefliyoruz.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Tshirtlab. Tüm hakları saklıdır.</p>
+  </footer>
+
+</body>
+</html>
 
