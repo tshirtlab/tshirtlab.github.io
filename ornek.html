@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Satış Sistemi - Tshirtlab</title>
+  <title>Sipariş Sistemi</title>
   <style>
     * {
       margin: 0;
@@ -39,8 +39,8 @@
       margin-bottom: 8px;
     }
 
-    .order-form select,
-    .order-form input {
+    .order-form input,
+    .order-form select {
       width: 100%;
       padding: 10px;
       margin-bottom: 15px;
@@ -62,12 +62,6 @@
       background: #444;
     }
 
-    .result {
-      text-align: center;
-      font-size: 18px;
-      margin-top: 20px;
-    }
-
     .product-img {
       width: 150px;
       height: 150px;
@@ -84,29 +78,45 @@
       text-align: center;
     }
 
+    .result {
+      text-align: center;
+      font-size: 18px;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>Satış Sistemi</h1>
+    <h1>Sipariş Sistemi</h1>
   </header>
 
   <div class="order-form">
     <label for="product">Ürün Seçin:</label>
     <select id="product">
-      <option value="T-shirt">T-shirt</option>
-      <option value="Hoodie">Hoodie</option>
-      <option value="Sweatshirt">Sweatshirt</option>
+      <option value="1tshirt.JPG">T-shirt (1tshirt.JPG)</option>
     </select>
 
-    <label for="quantity">Miktar:</label>
-    <input type="number" id="quantity" value="1" min="1">
+    <label for="name">Adınız:</label>
+    <input type="text" id="name" placeholder="Adınızı girin" required>
+
+    <label for="surname">Soyadınız:</label>
+    <input type="text" id="surname" placeholder="Soyadınızı girin" required>
+
+    <label for="phone">Telefon Numaranız:</label>
+    <input type="text" id="phone" placeholder="Telefon numaranızı girin" required>
+
+    <label for="address">Adresiniz:</label>
+    <input type="text" id="address" placeholder="Adresinizi girin" required>
+
+    <label for="payment">Ödeme Türü:</label>
+    <select id="payment">
+      <option value="Nakit">Nakit</option>
+      <option value="Kredi Kartı">Kredi Kartı</option>
+    </select>
 
     <button id="submitOrder">Siparişi Tamamla</button>
   </div>
-
-  <div class="result" id="result"></div>
 
   <div id="orderDetails" class="order-details" style="display: none;">
     <h3>Sipariş Tamamlandı!</h3>
@@ -114,21 +124,31 @@
     <p id="orderInfo"></p>
   </div>
 
+  <div class="result" id="result"></div>
+
   <script>
     document.getElementById("submitOrder").addEventListener("click", function() {
       // Kullanıcıdan alınan veriler
       const product = document.getElementById("product").value;
-      const quantity = document.getElementById("quantity").value;
-      
+      const name = document.getElementById("name").value;
+      const surname = document.getElementById("surname").value;
+      const phone = document.getElementById("phone").value;
+      const address = document.getElementById("address").value;
+      const payment = document.getElementById("payment").value;
+
       // Benzersiz sipariş kodu oluşturma
       const orderCode = "ORD" + Date.now() + Math.floor(Math.random() * 1000);
 
-      // Sipariş bilgilerini kullanıcıya gösterme
+      // Sipariş bilgilerini ekrana yazdırma
       const orderInfo = `
         Ürün: ${product} <br>
-        Miktar: ${quantity} <br>
+        Ad: ${name} <br>
+        Soyad: ${surname} <br>
+        Telefon: ${phone} <br>
+        Adres: ${address} <br>
+        Ödeme Türü: ${payment} <br>
         Sipariş Kodu: ${orderCode} <br>
-        Lütfen sipariş kodunuzla ödeme işlemi için bağlantıyı bekleyin.
+        Siparişiniz başarıyla alındı. Teşekkür ederiz!
       `;
 
       // Sipariş bilgilerini ekrana yazdır
@@ -136,6 +156,20 @@
 
       // Sipariş detayları bölümünü görünür yap
       document.getElementById("orderDetails").style.display = "block";
+
+      // Sipariş bilgilerini localStorage'a kaydetme (gerçek bir projede backend kullanılmalı)
+      localStorage.setItem('siparis', JSON.stringify({
+        product,
+        name,
+        surname,
+        phone,
+        address,
+        payment,
+        orderCode
+      }));
+
+      // Siparişi kaydettikten sonra sonuç göstergesi
+      document.getElementById("result").innerHTML = "Siparişiniz başarıyla onaylanmıştır!";
     });
   </script>
 
