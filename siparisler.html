@@ -3,111 +3,74 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Siparişler</title>
+  <title>Sipariş Detayları</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
       font-family: Arial, sans-serif;
       background: #f4f4f4;
       color: #333;
-    }
-
-    header {
-      background: #111;
-      color: #fff;
-      padding: 20px 30px;
-      text-align: center;
-    }
-
-    .order-list {
-      max-width: 800px;
-      margin: 40px auto;
-      background: #fff;
       padding: 20px;
+    }
+
+    .order-details {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fff;
       border-radius: 8px;
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
     }
 
-    .order-card {
-      background: #f9f9f9;
-      padding: 15px;
-      margin-bottom: 15px;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    .order-details h3 {
+      text-align: center;
+      margin-bottom: 20px;
     }
 
-    .order-card h3 {
+    .order-details p {
+      font-size: 16px;
       margin-bottom: 10px;
     }
 
-    .order-card p {
-      margin: 5px 0;
-      font-size: 16px;
-    }
-
-    .order-card img {
-      width: 100px;
-      height: 100px;
+    .order-details img {
+      width: 150px;
+      height: 150px;
       object-fit: cover;
-      margin-right: 15px;
-    }
-
-    .order-card-info {
-      display: flex;
-      align-items: center;
-    }
-
-    .order-card-info div {
-      margin-left: 15px;
+      margin: 20px auto;
+      display: block;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Siparişler</h1>
-  </header>
-
-  <div class="order-list" id="orderList">
-    <h2>Verilen Siparişler</h2>
-    <!-- Siparişler buraya eklenecek -->
+  <div class="order-details">
+    <h3>Sipariş Detayları</h3>
+    <img src="1tshirt.JPG" alt="T-shirt">
+    <p><strong>Ürün:</strong> <span id="product-name"></span></p>
+    <p><strong>Ad:</strong> <span id="customer-name"></span></p>
+    <p><strong>Soyad:</strong> <span id="customer-surname"></span></p>
+    <p><strong>Telefon:</strong> <span id="customer-phone"></span></p>
+    <p><strong>Adres:</strong> <span id="customer-address"></span></p>
+    <p><strong>Ödeme Türü:</strong> <span id="payment-method"></span></p>
+    <p><strong>Sipariş Kodu:</strong> <span id="order-code"></span></p>
   </div>
 
   <script>
-    // Siparişleri localStorage'dan al
-    const orders = JSON.parse(localStorage.getItem('siparis')) || [];
+    // Sayfa yüklendiğinde localStorage'dan sipariş verilerini al
+    window.onload = function() {
+      const orderData = JSON.parse(localStorage.getItem('siparis'));
 
-    // Eğer sipariş varsa, her siparişi ekrana yazdır
-    const orderList = document.getElementById('orderList');
-    if (orders.length > 0) {
-      orders.forEach(order => {
-        const orderCard = document.createElement('div');
-        orderCard.classList.add('order-card');
-
-        orderCard.innerHTML = `
-          <div class="order-card-info">
-            <img src="${order.product}" alt="Ürün" />
-            <div>
-              <h3>Sipariş Kodu: ${order.orderCode}</h3>
-              <p><strong>Adı Soyadı:</strong> ${order.name} ${order.surname}</p>
-              <p><strong>Telefon:</strong> ${order.phone}</p>
-              <p><strong>Adres:</strong> ${order.address}</p>
-              <p><strong>Ödeme Türü:</strong> ${order.payment}</p>
-              <p><strong>Ürün:</strong> ${order.product}</p>
-            </div>
-          </div>
-        `;
-        
-        orderList.appendChild(orderCard);
-      });
-    } else {
-      orderList.innerHTML = '<p>Henüz sipariş verilmedi.</p>';
-    }
+      if (orderData) {
+        document.getElementById('product-name').textContent = orderData.product;
+        document.getElementById('customer-name').textContent = orderData.name;
+        document.getElementById('customer-surname').textContent = orderData.surname;
+        document.getElementById('customer-phone').textContent = orderData.phone;
+        document.getElementById('customer-address').textContent = orderData.address;
+        document.getElementById('payment-method').textContent = orderData.payment;
+        document.getElementById('order-code').textContent = orderData.orderCode;
+      } else {
+        document.querySelector('.order-details').innerHTML = "<p>Sipariş bilgisi bulunamadı.</p>";
+      }
+    };
   </script>
 
 </body>
