@@ -5,12 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sipariş Sistemi</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
       font-family: Arial, sans-serif;
       background: #f4f4f4;
@@ -61,28 +55,6 @@
     .order-form button:hover {
       background: #444;
     }
-
-    .product-img {
-      width: 150px;
-      height: 150px;
-      object-fit: cover;
-      margin-top: 20px;
-    }
-
-    .order-details {
-      margin-top: 20px;
-      background-color: #f9f9f9;
-      padding: 15px;
-      border-radius: 6px;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
-
-    .result {
-      text-align: center;
-      font-size: 18px;
-      margin-top: 20px;
-    }
   </style>
 </head>
 <body>
@@ -118,17 +90,8 @@
     <button id="submitOrder">Siparişi Tamamla</button>
   </div>
 
-  <div id="orderDetails" class="order-details" style="display: none;">
-    <h3>Sipariş Tamamlandı!</h3>
-    <img src="1tshirt.JPG" alt="T-shirt" class="product-img">
-    <p id="orderInfo"></p>
-  </div>
-
-  <div class="result" id="result"></div>
-
   <script>
     document.getElementById("submitOrder").addEventListener("click", function() {
-      // Kullanıcıdan alınan veriler
       const product = document.getElementById("product").value;
       const name = document.getElementById("name").value;
       const surname = document.getElementById("surname").value;
@@ -136,40 +99,30 @@
       const address = document.getElementById("address").value;
       const payment = document.getElementById("payment").value;
 
-      // Benzersiz sipariş kodu oluşturma
-      const orderCode = "ORD" + Date.now() + Math.floor(Math.random() * 1000);
-
-      // Sipariş bilgilerini ekrana yazdırma
-      const orderInfo = `
-        Ürün: ${product} <br>
-        Ad: ${name} <br>
-        Soyad: ${surname} <br>
-        Telefon: ${phone} <br>
-        Adres: ${address} <br>
-        Ödeme Türü: ${payment} <br>
-        Sipariş Kodu: ${orderCode} <br>
-        Siparişiniz başarıyla alındı. Teşekkür ederiz!
-      `;
-
-      // Sipariş bilgilerini ekrana yazdır
-      document.getElementById("orderInfo").innerHTML = orderInfo;
-
-      // Sipariş detayları bölümünü görünür yap
-      document.getElementById("orderDetails").style.display = "block";
-
-      // Sipariş bilgilerini localStorage'a kaydetme (gerçek bir projede backend kullanılmalı)
-      localStorage.setItem('siparis', JSON.stringify({
+      const orderData = {
         product,
         name,
         surname,
         phone,
         address,
-        payment,
-        orderCode
-      }));
+        payment
+      };
 
-      // Siparişi kaydettikten sonra sonuç göstergesi
-      document.getElementById("result").innerHTML = "Siparişiniz başarıyla onaylanmıştır!";
+      // Siparişi backend'e gönder
+      fetch('http://localhost:3000/siparis-ver', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(orderData)
+      })
+      .then(response => response.text())
+      .then(data => {
+        alert(data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
     });
   </script>
 
