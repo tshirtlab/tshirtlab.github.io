@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Örnek Sipariş Sistemi</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      color: #333;
+    }
+
+    header {
+      background: #111;
+      color: #fff;
+      padding: 20px 30px;
+      text-align: center;
+    }
+
+    .order-form {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .order-form label {
+      display: block;
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .order-form select,
+    .order-form input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+    }
+
+    .order-form button {
+      background: #111;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .order-form button:hover {
+      background: #444;
+    }
+
+    .result {
+      text-align: center;
+      font-size: 18px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Örnek Sipariş Sistemi</h1>
+  </header>
+
+  <div class="order-form">
+    <label for="product">Ürün Seçin:</label>
+    <select id="product">
+      <option value="T-shirt">T-shirt</option>
+      <option value="Hoodie">Hoodie</option>
+      <option value="Sweatshirt">Sweatshirt</option>
+    </select>
+
+    <label for="quantity">Miktar:</label>
+    <input type="number" id="quantity" value="1" min="1">
+
+    <button id="submitOrder">Siparişi Tamamla</button>
+  </div>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    document.getElementById("submitOrder").addEventListener("click", function() {
+      // Kullanıcıdan alınan veriler
+      const product = document.getElementById("product").value;
+      const quantity = document.getElementById("quantity").value;
+      
+      // Benzersiz sipariş kodu oluşturma
+      const orderCode = "ORD" + Date.now() + Math.floor(Math.random() * 1000);
+
+      // Sipariş bilgilerini ve kodunu kullanıcıya gösterme
+      document.getElementById("result").innerHTML = `
+        Siparişiniz tamamlandı! <br>
+        Ürün: ${product} <br>
+        Miktar: ${quantity} <br>
+        Sipariş Kodu: ${orderCode} <br>
+        <br>
+        Lütfen sipariş kodunuzla ödeme işlemi için bağlantıyı bekleyin.
+      `;
+    });
+  </script>
+
+</body>
+</html>
