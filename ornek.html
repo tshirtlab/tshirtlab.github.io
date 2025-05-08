@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Örnek Sipariş Sistemi</title>
+  <title>Satış Sistemi - Tshirtlab</title>
   <style>
     * {
       margin: 0;
@@ -67,12 +67,29 @@
       font-size: 18px;
       margin-top: 20px;
     }
+
+    .product-img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      margin-top: 20px;
+    }
+
+    .order-details {
+      margin-top: 20px;
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-radius: 6px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
   </style>
 </head>
 <body>
 
   <header>
-    <h1>Örnek Sipariş Sistemi</h1>
+    <h1>Satış Sistemi</h1>
   </header>
 
   <div class="order-form">
@@ -91,6 +108,12 @@
 
   <div class="result" id="result"></div>
 
+  <div id="orderDetails" class="order-details" style="display: none;">
+    <h3>Sipariş Tamamlandı!</h3>
+    <img src="1tshirt.JPG" alt="T-shirt" class="product-img">
+    <p id="orderInfo"></p>
+  </div>
+
   <script>
     document.getElementById("submitOrder").addEventListener("click", function() {
       // Kullanıcıdan alınan veriler
@@ -100,15 +123,19 @@
       // Benzersiz sipariş kodu oluşturma
       const orderCode = "ORD" + Date.now() + Math.floor(Math.random() * 1000);
 
-      // Sipariş bilgilerini ve kodunu kullanıcıya gösterme
-      document.getElementById("result").innerHTML = `
-        Siparişiniz tamamlandı! <br>
+      // Sipariş bilgilerini kullanıcıya gösterme
+      const orderInfo = `
         Ürün: ${product} <br>
         Miktar: ${quantity} <br>
         Sipariş Kodu: ${orderCode} <br>
-        <br>
         Lütfen sipariş kodunuzla ödeme işlemi için bağlantıyı bekleyin.
       `;
+
+      // Sipariş bilgilerini ekrana yazdır
+      document.getElementById("orderInfo").innerHTML = orderInfo;
+
+      // Sipariş detayları bölümünü görünür yap
+      document.getElementById("orderDetails").style.display = "block";
     });
   </script>
 
